@@ -1,0 +1,133 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix phys: <http://www.physicstutoring.org/ontology#> .
+
+# Ontology Declaration
+<http://www.physicstutoring.org/ontology> a owl:Ontology ;
+    rdfs:label "Physics Motion Concepts Ontology"@en ;
+    rdfs:comment "Comprehensive ontology for motion concepts in physics education"@en .
+
+# Class Definitions
+phys:PhysicalConcept a owl:Class ;
+    rdfs:label "Physical Concept"@en ;
+    rdfs:comment "Base class for fundamental physical concepts"@en .
+
+phys:MotionConcept a owl:Class ;
+    rdfs:subClassOf phys:PhysicalConcept ;
+    rdfs:label "Motion Concept"@en ;
+    rdfs:comment "Specific concepts related to object motion"@en .
+
+phys:SpeedConcept a owl:Class ;
+    rdfs:subClassOf phys:MotionConcept ;
+    rdfs:label "Speed Concept"@en ;
+    rdfs:comment "Concepts related to speed and distance traveled"@en .
+
+phys:VelocityConcept a owl:Class ;
+    rdfs:subClassOf phys:MotionConcept ;
+    rdfs:label "Velocity Concept"@en ;
+    rdfs:comment "Concepts related to velocity and directional motion"@en .
+
+phys:AccelerationConcept a owl:Class ;
+    rdfs:subClassOf phys:MotionConcept ;
+    rdfs:label "Acceleration Concept"@en ;
+    rdfs:comment "Concepts related to change in velocity over time"@en .
+
+# Data Properties
+phys:hasNumericValue a owl:DatatypeProperty ;
+    rdfs:domain phys:MotionConcept ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "Numeric Value"@en ;
+    rdfs:comment "Numerical representation of a motion concept"@en .
+
+phys:hasMeasurementUnit a owl:DatatypeProperty ;
+    rdfs:domain phys:MotionConcept ;
+    rdfs:range xsd:string ;
+    rdfs:label "Measurement Unit"@en ;
+    rdfs:comment "Unit of measurement for the motion concept"@en .
+
+# Object Properties
+phys:hasComponentOf a owl:ObjectProperty ;
+    rdfs:domain phys:MotionConcept ;
+    rdfs:range phys:MotionConcept ;
+    rdfs:label "Has Component"@en ;
+    rdfs:comment "Relationship between different motion concept components"@en .
+
+phys:relatedTo a owl:ObjectProperty ;
+    rdfs:domain phys:MotionConcept ;
+    rdfs:range phys:MotionConcept ;
+    rdfs:label "Related Concept"@en ;
+    rdfs:comment "Indicates relationship between different motion concepts"@en .
+
+# Specific Concept Definitions
+phys:AverageSpeed a owl:Class ;
+    rdfs:subClassOf phys:SpeedConcept ;
+    rdfs:label "Average Speed"@en ;
+    rdfs:comment "Speed calculated over a total distance and total time"@en .
+
+phys:Instantaneous a owl:Class ;
+    rdfs:subClassOf phys:SpeedConcept ;
+    rdfs:label "Instantaneous Speed"@en ;
+    rdfs:comment "Speed at a specific moment in time"@en .
+
+phys:LinearVelocity a owl:Class ;
+    rdfs:subClassOf phys:VelocityConcept ;
+    rdfs:label "Linear Velocity"@en ;
+    rdfs:comment "Velocity in a straight line"@en .
+
+phys:AngularVelocity a owl:Class ;
+    rdfs:subClassOf phys:VelocityConcept ;
+    rdfs:label "Angular Velocity"@en ;
+    rdfs:comment "Rotational velocity around a fixed axis"@en .
+
+phys:UniformAcceleration a owl:Class ;
+    rdfs:subClassOf phys:AccelerationConcept ;
+    rdfs:label "Uniform Acceleration"@en ;
+    rdfs:comment "Constant rate of change in velocity"@en .
+
+phys:NonUniformAcceleration a owl:Class ;
+    rdfs:subClassOf phys:AccelerationConcept ;
+    rdfs:label "Non-Uniform Acceleration"@en ;
+    rdfs:comment "Variable rate of change in velocity"@en .
+
+# Computational Relationship Definitions
+phys:speedCalculation a owl:ObjectProperty ;
+    rdfs:domain phys:SpeedConcept ;
+    rdfs:label "Speed Calculation Method"@en ;
+    rdfs:comment "Mathematical relationship for calculating speed"@en .
+
+phys:velocityCalculation a owl:ObjectProperty ;
+    rdfs:domain phys:VelocityConcept ;
+    rdfs:label "Velocity Calculation Method"@en ;
+    rdfs:comment "Mathematical relationship for calculating velocity"@en .
+
+phys:accelerationCalculation a owl:ObjectProperty ;
+    rdfs:domain phys:AccelerationConcept ;
+    rdfs:label "Acceleration Calculation Method"@en ;
+    rdfs:comment "Mathematical relationship for calculating acceleration"@en .
+
+# Calculation Rules
+phys:SpeedFormula a owl:Class ;
+    rdfs:label "Speed Formula"@en ;
+    rdfs:comment "Formula for calculating speed: Speed = Distance / Time"@en .
+
+phys:VelocityFormula a owl:Class ;
+    rdfs:label "Velocity Formula"@en ;
+    rdfs:comment "Formula for calculating velocity: Velocity = Change in Position / Time"@en .
+
+phys:AccelerationFormula a owl:Class ;
+    rdfs:label "Acceleration Formula"@en ;
+    rdfs:comment "Formula for calculating acceleration: Acceleration = Change in Velocity / Time"@en .
+
+# Restrictions and Constraints
+phys:PositiveNumericValue a owl:Restriction ;
+    owl:onProperty phys:hasNumericValue ;
+    owl:minInclusive 0 ;
+    rdfs:label "Positive Numeric Value"@en ;
+    rdfs:comment "Ensures numeric values are non-negative"@en .
+
+# Metadata
+<http://www.physicstutoring.org/ontology>
+    owl:versionInfo "1.0.0"^^xsd:string ;
+    rdfs:seeAlso <https://example.com/physics-motion-documentation> .
